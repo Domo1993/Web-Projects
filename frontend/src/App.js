@@ -17,12 +17,12 @@ class App extends Component {
         const url = this.state.url;
         
         // Fetching data from our api and inputting the qeury params from the user's inputted text
-        fetch(`https://calm-tundra-64769.herokuapp.com/api?id=${id}&title=${title}&description=${description}&URL=${url}`, {
+        fetch(`/api?id=${id}&title=${title}&description=${description}&URL=${url}`, {
                 method: "POST"
             })
             .then(() => {
                 // Fetching our api and displaying the updated data
-                fetch('https://calm-tundra-64769.herokuapp.com/api', { method: "GET", headers: { "Content-Type": "application/json" } })
+                fetch('/api', { method: "GET", headers: { "Content-Type": "application/json" } })
                     .then(res => res.json())
                     .then(projects => this.setState({ projects }));
             });
@@ -33,6 +33,7 @@ class App extends Component {
             description: "",
             url: ""
         });
+        window.location.reload()
     }
     // This edit function allows the user to edit an item from the table
     myEdit() {
@@ -41,14 +42,15 @@ class App extends Component {
         const description = this.state.description;
         const url = this.state.url;
         // Fetching data from our api and inputting the qeury params from the user's inputted text
-        fetch(`https://calm-tundra-64769.herokuapp.com/api?id=${id}&title=${title}&description=${description}&URL=${url}`, {
+        fetch(`/api?id=${id}&title=${title}&description=${description}&URL=${url}`, {
                 method: "PUT"
             })
             .then(() => {
                 // Fetching our api and displaying the updated data
-                fetch('https://calm-tundra-64769.herokuapp.com/api', { method: "GET", headers: { "Content-Type": "application/json" } })
+                fetch('/api', { method: "GET", headers: { "Content-Type": "application/json" } })
                     .then(res => res.json())
                     .then(projects => this.setState({ projects }));
+                    window.location.reload()
             });
 
         this.setState({
@@ -62,20 +64,21 @@ class App extends Component {
     myDelete() {
         const id = this.state.id;
         // Fetching data from our api and inputting the qeury params from the user's inputted text
-        fetch(`https://calm-tundra-64769.herokuapp.com/api?id=${id}`, {
+        fetch(`/api?id=${id}`, {
                 method: "DELETE"
             })
             .then((i) => {
                 // Fetching our api and displaying the updated data
-                fetch('https://calm-tundra-64769.herokuapp.com/api', { method: "GET", headers: { "Content-Type": "application/json" } })
+                fetch('/api', { method: "GET", headers: { "Content-Type": "application/json" } })
                     .then(res => res.json())
                     .then(projects => this.setState({ projects }));
             });
+            window.location.reload()
     }
 
     // displays the webProjects data when the app loads
     componentDidMount() {
-        fetch('https://calm-tundra-64769.herokuapp.com/api', { method: "GET", headers: { "Content-Type": "application/json" } })
+        fetch('/api', { method: "GET", headers: { "Content-Type": "application/json" } })
             .then(res => res.json())
             .then(projects => this.setState({ projects }));
     }
