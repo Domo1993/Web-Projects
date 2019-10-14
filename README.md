@@ -2,6 +2,7 @@
 Adding, editing and deleting projects that is displayed in table form
 
 To use this project:
+
 -npm install in the first directory (This is the backend section)
 
 -npm start
